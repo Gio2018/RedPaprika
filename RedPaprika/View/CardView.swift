@@ -19,6 +19,9 @@ struct CardView: View {
     @Environment(\.dependencies)
     private var dependencies
 
+    @State private var isPresentingSourcePage: Bool = false
+    @State private var isPresentingYoutubeVideo: Bool = false
+
     @Query private var fetchedImage: [CachedImage]
     private var image: CachedImage? {
         fetchedImage.first
@@ -36,6 +39,23 @@ struct CardView: View {
 
     var body: some View {
         makeBody()
+            // ensure taps are effective on the whole card.
+            .contentShape(Rectangle())
+            .fullScreenCover(isPresented: $isPresentingSourcePage) {
+                SafariView(url: URL(string: configuration.sourceUrl!)!)
+                    .ignoresSafeArea(.all)
+            }
+            .fullScreenCover(isPresented: $isPresentingYoutubeVideo) {
+                SafariView(url: URL(string: configuration.youtubeUrl!)!)
+                    .ignoresSafeArea(.all)
+            }
+            .onTapGesture {
+                // these checks ensure that the above force unwraps are safe.
+                if let urlString = configuration.sourceUrl,
+                    let _ = URL(string: urlString) {
+                    isPresentingSourcePage = true
+                }
+            }
     }
 }
 
@@ -78,7 +98,11 @@ private extension CardView {
             HStack {
                 Spacer()
                 Button {
-                    print("Cippa")
+                    // these checks ensure that the above force unwraps are safe.
+                    if let urlString = configuration.youtubeUrl,
+                        let _ = URL(string: urlString) {
+                        isPresentingYoutubeVideo = true
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "play.rectangle")
