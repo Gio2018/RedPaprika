@@ -98,7 +98,7 @@ private extension MainView {
             Spacer()
             HStack {
                 Spacer()
-                Text("No results found")
+                Text("No recipes found")
                 Spacer()
             }
             Spacer()

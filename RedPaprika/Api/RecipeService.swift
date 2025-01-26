@@ -34,9 +34,6 @@ struct AppRecipeService: RecipeService {
 
         let recipes = try decoder.decode(RemoteRecipes.self, from: data).recipes
 
-        guard !recipes.isEmpty else {
-            throw ApiError.emptyData
-        }
         return recipes
     }
 }
