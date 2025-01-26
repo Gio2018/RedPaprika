@@ -56,6 +56,12 @@ final actor SwiftDataRecipeStore: RecipeStore {
                 }
             }
         }
+        let recipeIDs = remoteRecipes.reduce(into: Set<UUID>()) { $0.insert($1.uuid) }
+        let orphanedRecipes = try fetchOrphanedRecipes(recipeIDs)
+        orphanedRecipes.forEach { modelContext.delete($0) }
+        let cuisineNames = Set(recipesByCuisine.keys)
+        let orphanedCuisines = try fetchOrphanedCuisines(cuisineNames)
+        orphanedCuisines.forEach { modelContext.delete($0) }
         // TODO: add removal of orphaned recipes and cuisines
         guard modelContext.hasChanges else { return }
         try modelContext.save()
@@ -89,5 +95,17 @@ final actor SwiftDataRecipeStore: RecipeStore {
             modelContext.insert(recipe)
             return recipe
         }
+    }
+
+    private func fetchOrphanedRecipes(_ validRecipes: Set<UUID>) throws -> [Recipe] {
+        let predicate = #Predicate<Recipe> { !validRecipes.contains($0.remoteID) }
+        let fetchDescriptor = FetchDescriptor(predicate: predicate)
+        return try modelContext.fetch(fetchDescriptor)
+    }
+
+    private func fetchOrphanedCuisines(_ validCuisines: Set<String>) throws -> [Cuisine] {
+        let predicate = #Predicate<Cuisine> { !validCuisines.contains($0.name) }
+        let fetchDescriptor = FetchDescriptor(predicate: predicate)
+        return try modelContext.fetch(fetchDescriptor)
     }
 }

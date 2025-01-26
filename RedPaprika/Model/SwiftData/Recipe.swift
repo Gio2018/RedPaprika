@@ -12,7 +12,7 @@ import SwiftUI
     var photoUrl: String?
     var sourceUrl: String?
     var youtubeUrl: String?
-    var cuisine: Cuisine
+    var cuisine: Cuisine?
 
     init(name: String, remoteID: UUID, cuisine: Cuisine) {
         self.name = name

@@ -13,7 +13,7 @@ struct CarouselView: View {
 
     init(name: String) {
         self.title = name
-        let predicate = #Predicate<Recipe> { $0.cuisine.name == name }
+        let predicate = #Predicate<Recipe> { $0.cuisine?.name == name }
         let sortDescriptor = SortDescriptor<Recipe>(\.name, order: .forward)
         let fetchDescriptor = FetchDescriptor(predicate: predicate, sortBy: [sortDescriptor])
         _recipes = Query(fetchDescriptor)
