@@ -1,32 +1,29 @@
-//
-//  RedPaprikaApp.swift
-//  RedPaprika
-//
-//  Created by Giorgio Ruscigno on 1/23/25.
-//
+// Red Paprika recipe app
+// Giorgio Ruscigno, 2025.
 
 import SwiftUI
 import SwiftData
 
 @main
 struct RedPaprikaApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    private let modelContainer: ModelContainer
+    private let recipeStore: RecipeStore
+    private let imageCache: ImageCache
+    private let dependencies: Dependencies
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    init() {
+        dependencies = AppDependencies()
+        modelContainer = dependencies.makeModelContainer()
+        imageCache = dependencies.makeImageCache(container: modelContainer)
+        recipeStore = dependencies.makeRecipeStore(container: modelContainer)
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView(dependencies.makeMainViewModel(store: recipeStore))
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
+        .environment(\.dependencies, dependencies)
+        .environment(\.imageCache, imageCache)
     }
 }
