@@ -3,31 +3,28 @@
 
 import Foundation
 import SwiftData
-import SwiftUI
 
-protocol RecipeStore {
-    func fetchRecipes() async throws
+// TODO: REFACTOR: use @ModelActor strictly for SwiftData and wrap into an observable object (viewmodel?)
+
+/// Generic recipe store
+protocol RecipeStore: Sendable {
+    /// Fetch recipes and makes them available to the store
+    /// - Returns: true if the fetch succeeds
+    func fetchRecipes(service: RecipeService) async -> Bool
 }
 
-/// This implementation is used solely for a default value in the environment
-struct DefaultRecipeStore: RecipeStore {
-    func fetchRecipes() async throws {
-        fatalError("this implementation should not be used")
-    }
-}
-
-extension EnvironmentValues {
-    @Entry var recipeStore: any RecipeStore = DefaultRecipeStore()
-}
-
-/// Actor for exclusive write operations on data
+/// SwiftData backed implementation of `RecipeStore`
 @ModelActor
-public final actor SwiftDataRecipeStore: RecipeStore {
-    private let service: RecipeService = RecipeService()
-
-    func fetchRecipes() async throws {
-        let remoteRecipes = try await service.getRecipes()
-        try await updateRecipes(from: remoteRecipes)
+final actor SwiftDataRecipeStore: RecipeStore {
+    func fetchRecipes(service: RecipeService) async -> Bool {
+        do {
+            let remoteRecipes = try await service.getRecipes()
+            try await updateRecipes(from: remoteRecipes)
+            return true
+        } catch {
+            print(error)
+            return false
+        }
     }
 
     private func updateRecipes(from remoteRecipes: [RemoteRecipe]) async throws {
@@ -39,28 +36,37 @@ public final actor SwiftDataRecipeStore: RecipeStore {
             }
         }
 
-        recipesByCuisine.forEach { cuisine in
-            let storedCuisine = fetchOrCreateCuisine(cuisine.key)
+        try recipesByCuisine.forEach { cuisine in
+            let storedCuisine = try fetchOrCreateCuisine(cuisine.key)
             cuisine.value.forEach {
-                let recipe = fetchOrCreateRecipe(remoteID: $0.uuid.uuidString, name: $0.name, cuisine: storedCuisine)
+                let recipe = fetchOrCreateRecipe(remoteID: $0.uuid, name: $0.name, cuisine: storedCuisine)
+                // these checks are a little tedious but minimize writes to Core Data
+                // an improvement would be to implement a more general way to do it
                 if recipe.thumbnailUrl != $0.photoUrlSmall {
                     recipe.thumbnailUrl = $0.photoUrlSmall
                 }
-                recipe.thumbnailUrl = $0.photoUrlSmall
-                recipe.photoUrl = $0.photoUrlLarge
-                recipe.sourceUrl = $0.sourceUrl
-                recipe.youtubeUrl = $0.youtubeUrl
+                if recipe.photoUrl != $0.photoUrlLarge {
+                    recipe.photoUrl = $0.photoUrlLarge
+                }
+                if recipe.sourceUrl != $0.sourceUrl {
+                    recipe.sourceUrl = $0.sourceUrl
+                }
+                if recipe.youtubeUrl != $0.youtubeUrl {
+                    recipe.youtubeUrl = $0.youtubeUrl
+                }
             }
         }
+        // TODO: add removal of orphaned recipes and cuisines
+        guard modelContext.hasChanges else { return }
         try modelContext.save()
     }
 
-    private func fetchOrCreateCuisine(_ name: String) -> Cuisine {
+    private func fetchOrCreateCuisine(_ name: String) throws -> Cuisine {
         let predicate = #Predicate<Cuisine> { $0.name == name }
         var fetchDescriptor = FetchDescriptor(predicate: predicate)
         fetchDescriptor.fetchLimit = 1
 
-        let result = (try? modelContext.fetch(fetchDescriptor)) ?? []
+        let result = try modelContext.fetch(fetchDescriptor)
         if let cuisine = result.first {
             return cuisine
         } else {
@@ -70,7 +76,7 @@ public final actor SwiftDataRecipeStore: RecipeStore {
         }
     }
 
-    private func fetchOrCreateRecipe(remoteID: String, name: String, cuisine: Cuisine) -> Recipe {
+    private func fetchOrCreateRecipe(remoteID: UUID, name: String, cuisine: Cuisine) -> Recipe {
         let predicate = #Predicate<Recipe> { $0.remoteID == remoteID }
         var fetchDescriptor = FetchDescriptor(predicate: predicate)
         fetchDescriptor.fetchLimit = 1
@@ -85,4 +91,3 @@ public final actor SwiftDataRecipeStore: RecipeStore {
         }
     }
 }
-
