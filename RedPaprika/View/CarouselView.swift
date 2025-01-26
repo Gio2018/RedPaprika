@@ -4,13 +4,15 @@
 import SwiftUI
 import SwiftData
 
+/// A view that displays a carousel of cards and a title.
+/// Used to display list or recipes for a specific cuisine.
 struct CarouselView: View {
-    let cuisineName: String
+    let title: String
     @Query private var recipes: [Recipe]
     @State private var cards: [CardConfiguration] = []
 
     init(name: String) {
-        self.cuisineName = name
+        self.title = name
         let predicate = #Predicate<Recipe> { $0.cuisine.name == name }
         let sortDescriptor = SortDescriptor<Recipe>(\.name, order: .forward)
         let fetchDescriptor = FetchDescriptor(predicate: predicate, sortBy: [sortDescriptor])
@@ -20,14 +22,16 @@ struct CarouselView: View {
     var body: some View {
         ZStack {
             makeBody()
+                .padding(.top, 8)
         }
         .onChange(of: recipes, initial: true) {
             // Despite a little code overhead, this limits UI updates
             // to only when the recipes actually change.
             // The main reason for it being that queries could be
             // re-triggered when the carousel views go on and off screen.
-            if updatedCards != cards {
-                cards = updatedCards
+            let newCards = updatedCards
+            if newCards != cards {
+                cards = newCards
             }
         }
     }
@@ -38,25 +42,25 @@ private extension CarouselView {
     @ViewBuilder
     func makeBody() -> some View {
         if !cards.isEmpty {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(cuisineName)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(title)
+                    .font(.title2.bold())
+                    .foregroundColor(Color("highContrastInverted"))
+                    .padding(.leading, 16)
                 makeCarousel()
             }
-            .background(Color.yellow)
         }
     }
 
     func makeCarousel() -> some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: 16) {
+            HStack(spacing: 24) {
                 ForEach(cards) {
-                    RecipeCard(cuisineName: cuisineName, configuration: $0)
+                    CardView(carouselTitle: title, configuration: $0)
                         .padding(.vertical, 16)
                 }
             }
-            .background(Color.red)
         }
-        .background(Color.green)
         .scrollIndicators(.hidden)
         .safeAreaInset(edge: .leading) {
             Spacer()
@@ -88,7 +92,11 @@ private extension CarouselView {
 
 #Preview {
     let container = PreviewProvider.previewContainer
+    let dependencies = PreviewDependencies()
+    let imageCache = PreviewImageCache()
 
     CarouselView(name: "Italian")
         .modelContainer(container)
+        .environment(\.dependencies, dependencies)
+        .environment(\.imageCache, imageCache)
 }
