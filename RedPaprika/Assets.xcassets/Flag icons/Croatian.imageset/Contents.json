@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "Croatia.png",
       "idiom" : "universal"
     }
   ],
