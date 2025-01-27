@@ -49,15 +49,27 @@ the youtube icon used for this project is provided by [Youtube icons created by 
 the placeholder image used for this projectis provided by [Recipe icons created by Edwinp99 - Flaticon](https://www.flaticon.com/free-icons/recipe)
 
 the rounded flag icons used in this project are provided by the following creators:
+
 [United states icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/united-states)
+
 [European icons created by amoghdesign - Flaticon](https://www.flaticon.com/free-icons/european)
+
 [Canada icons created by GeekClick - Flaticon](https://www.flaticon.com/free-icons/canada)
+
 [Croatian icons created by amoghdesign - Flaticon](https://www.flaticon.com/free-icons/croatian)
+
 [France icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/france)
+
 [Greece icons created by Marcus Christensen - Flaticon](https://www.flaticon.com/free-icons/greece)
+
 [Italy icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/italy)
+
 [Malaysia icons created by amoghdesign - Flaticon](https://www.flaticon.com/free-icons/malaysia)
+
 [Poland icons created by GeekClick - Flaticon](https://www.flaticon.com/free-icons/poland)
+
 [Portugal icons created by iconset.co - Flaticon](https://www.flaticon.com/free-icons/portugal)
+
 [Russia icons created by GeekClick - Flaticon](https://www.flaticon.com/free-icons/russia)
+
 [Tunisia icons created by amoghdesign - Flaticon](https://www.flaticon.com/free-icons/tunisia)
