@@ -44,8 +44,6 @@ In this project, I've used some free icons from the web that require attribution
 
 the app icon used for this project is provided by [Paprika icons created by Sophia tkx - Flaticon](https://www.flaticon.com/free-icons/paprika)
 
-the youtube icon used for this project is provided by [Youtube icons created by IconBaandar - Flaticon](https://www.flaticon.com/free-icons/youtube)
-
 the placeholder image used for this projectis provided by [Recipe icons created by Edwinp99 - Flaticon](https://www.flaticon.com/free-icons/recipe)
 
 the rounded flag icons used in this project are provided by the following creators:
