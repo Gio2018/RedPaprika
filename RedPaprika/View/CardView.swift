@@ -21,6 +21,7 @@ struct CardView: View {
 
     @State private var isPresentingSourcePage: Bool = false
     @State private var isPresentingYoutubeVideo: Bool = false
+    @State private var isPresentingNotFoundAlert: Bool = false
 
     @Query private var fetchedImage: [CachedImage]
     private var image: CachedImage? {
@@ -49,11 +50,20 @@ struct CardView: View {
                 SafariView(url: URL(string: configuration.youtubeUrl!)!)
                     .ignoresSafeArea(.all)
             }
+            .alert(isPresented: $isPresentingNotFoundAlert) {
+                Alert(
+                    title: Text("Uh Oh"),
+                    message: Text("We are sorry, this content is not available at this time."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
             .onTapGesture {
                 // these checks ensure that the above force unwraps are safe.
                 if let urlString = configuration.sourceUrl,
                     let _ = URL(string: urlString) {
                     isPresentingSourcePage = true
+                } else {
+                    isPresentingNotFoundAlert = true
                 }
             }
     }
@@ -102,6 +112,8 @@ private extension CardView {
                     if let urlString = configuration.youtubeUrl,
                         let _ = URL(string: urlString) {
                         isPresentingYoutubeVideo = true
+                    }  else {
+                        isPresentingNotFoundAlert = true
                     }
                 } label: {
                     HStack {
