@@ -82,6 +82,7 @@ private extension MainView {
     func makeProgressView() -> some View {
         VStack {
             Spacer()
+                .frame(minHeight: 200)
             HStack {
                 Spacer()
                 ProgressView()
@@ -93,12 +94,15 @@ private extension MainView {
 
     /// A view that informs users that no results were found
     func makeEmptyResultsView() -> some View {
-        // TODO: replace this content with a more appealing view
         VStack {
             Spacer()
+                .frame(minHeight: 200)
             HStack {
                 Spacer()
                 Text("No recipes found")
+                    .font(.title)
+                    .foregroundColor(Color("highContrastInverted"))
+                    .fontWeight(.bold)
                 Spacer()
             }
             Spacer()
@@ -107,12 +111,15 @@ private extension MainView {
 
     /// A view that informs users that an error occurred
     func makeErrorView() -> some View {
-        // TODO: replace this content with a more appealing view
         VStack {
             Spacer()
+                .frame(minHeight: 200)
             HStack {
                 Spacer()
                 Text("An error occurred")
+                    .font(.title)
+                    .foregroundColor(Color("highContrastInverted"))
+                    .fontWeight(.bold)
                 Spacer()
             }
             Spacer()
@@ -149,6 +156,16 @@ private extension MainView {
 
 #Preview {
     let container = PreviewProvider.previewContainer
+    let dependencies = PreviewDependencies()
+    let imageCache = PreviewImageCache()
+    MainView(MainViewModel(store: PreviewStore(), service: PreviewRecipeService()))
+        .modelContainer(container)
+        .environment(\.dependencies, dependencies)
+        .environment(\.imageCache, imageCache)
+}
+
+#Preview {
+    let container = PreviewProvider.emptyPreviewContainer
     let dependencies = PreviewDependencies()
     let imageCache = PreviewImageCache()
     MainView(MainViewModel(store: PreviewStore(), service: PreviewRecipeService()))
