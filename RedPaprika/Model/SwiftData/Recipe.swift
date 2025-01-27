@@ -12,6 +12,8 @@ import SwiftUI
     var photoUrl: String?
     var sourceUrl: String?
     var youtubeUrl: String?
+    // in theory, this could/should be non optoional, but in practice, it needs to..
+    // https://forums.developer.apple.com/forums/thread/772885
     var cuisine: Cuisine?
 
     init(name: String, remoteID: UUID, cuisine: Cuisine) {
