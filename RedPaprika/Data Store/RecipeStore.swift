@@ -10,13 +10,13 @@ import SwiftData
 protocol RecipeStore: Sendable {
     /// Fetch recipes and makes them available to the store
     /// - Returns: true if the fetch succeeds
-    func fetchRecipes(service: RecipeService) async -> Bool
+    func refreshRecipes(from service: RecipeService) async -> Bool
 }
 
 /// SwiftData backed implementation of `RecipeStore`
 @ModelActor
 final actor SwiftDataRecipeStore: RecipeStore {
-    func fetchRecipes(service: RecipeService) async -> Bool {
+    func refreshRecipes(from service: RecipeService) async -> Bool {
         do {
             let remoteRecipes = try await service.getRecipes()
             try await updateRecipes(from: remoteRecipes)

@@ -19,7 +19,7 @@ final class MainViewModel: ObservableObject {
     func fetchRecipes() async {
         guard state != .loading else { return }
         state = .loading
-        let result = await store.fetchRecipes(service: service)
+        let result = await store.refreshRecipes(from: service)
         state = result ? .ready : .error
     }
 }

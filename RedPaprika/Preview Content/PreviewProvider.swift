@@ -85,7 +85,7 @@ struct previewClient: Client {
 }
 
 struct PreviewStore: RecipeStore {
-    func fetchRecipes(service: RecipeService) async -> Bool {
+    func refreshRecipes(from service: RecipeService) async -> Bool {
         true
     }
 }
