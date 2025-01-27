@@ -57,7 +57,6 @@ struct RemoteImage: View {
 
 #Preview {
     let container = PreviewProvider.previewContainer
-    let dependencies = PreviewDependencies()
     let imageCache = PreviewImageCache()
     let imageService = PreviewImageService()
 

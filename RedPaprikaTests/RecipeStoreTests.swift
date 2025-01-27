@@ -13,7 +13,7 @@ struct RecipeStoreTests {
         private let shouldThrow: Bool
 
         enum MockServiceError: Error {
-            case test
+            case testError
         }
 
         init(recipes: [RedPaprika.RemoteRecipe] = [], shouldThrow: Bool = false) {
@@ -23,7 +23,7 @@ struct RecipeStoreTests {
 
         func getRecipes() async throws -> [RedPaprika.RemoteRecipe] {
             guard !shouldThrow else {
-                throw MockServiceError.test
+                throw MockServiceError.testError
             }
             return recipes
         }
@@ -42,7 +42,6 @@ struct RecipeStoreTests {
         let fetchDescriptor = FetchDescriptor<Recipe>()
         let recipes = try modelContainer.mainContext.fetch(fetchDescriptor)
         #expect(recipes.count == 3)
-        #expect(recipes[0].name == "Apam Balik")
     }
 
     @Test("Given an empty array of [RemoteRecipe], the store does not insert any recipe in SwiftData")

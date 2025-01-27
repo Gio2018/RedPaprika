@@ -13,8 +13,6 @@ enum ImageError: Error {
 protocol ImageCache: Sendable {
     /// Stores a remote image in the cache
     func store(from url: String, service: ImageService) async -> Bool
-    /// Retrieves an image from the cache, if/when needed
-    func getImage(from url: String) async throws -> Image
 }
 
 /// SwiftData backed implementation of `ImageCache`
@@ -70,12 +68,6 @@ final actor SwiftDataImageCache: ImageCache {
             exists = false
         }
         return exists
-    }
-
-    func getImage(from url: String) async throws -> Image {
-        // This method is not used in this implementation, since
-        // retrieving the image relies on @Query directly in the view
-        Image("Placeholder")
     }
 }
 

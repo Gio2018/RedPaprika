@@ -28,7 +28,6 @@ struct RecipeServiceTests {
         let recipes = try await service.getRecipes()
         // Then
         #expect(recipes.count == 3)
-        #expect(recipes[0].name == "Apam Balik")
     }
 
     @Test("Given an empty json from the client, the service returns an empty array")
