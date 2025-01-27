@@ -11,9 +11,9 @@ Red Paprika is a simple MVP of a recipe app, built with SwiftUI, SwiftData and s
 - Pull-to-refresh to refresh the recipe list at any time
 - The app handles situations like errors from the backend: to simulate this, you can build this project from Xcode and in the file `RecipeService.swift` change the designated endpoint to see how the app handles these states.
 
-
-https://github.com/user-attachments/assets/f339a7d6-b37f-4c63-9413-50fd1892364c
-
+<div align="center">
+<video src="https://github.com/user-attachments/assets/f339a7d6-b37f-4c63-9413-50fd1892364c" width="400">
+</div>
 
 ## Focus Areas
 The main areas of focus are the following. All of them reflect the spirit of this project, which is to build it with efficiency in mind by using the latest technologies:
