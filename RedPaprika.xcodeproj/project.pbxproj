@@ -18,19 +18,11 @@
 			remoteGlobalIDString = AAC5E6682D42BAB400B58BFD;
 			remoteInfo = RedPaprika;
 		};
-		AAC5E6862D42BAB600B58BFD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAC5E6612D42BAB400B58BFD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAC5E6682D42BAB400B58BFD;
-			remoteInfo = RedPaprika;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AAC5E6692D42BAB400B58BFD /* RedPaprika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedPaprika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC5E67B2D42BAB600B58BFD /* RedPaprikaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedPaprikaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAC5E6852D42BAB600B58BFD /* RedPaprikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedPaprikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFBA74A2D44CC7A002E44DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,11 +50,6 @@
 			path = RedPaprikaTests;
 			sourceTree = "<group>";
 		};
-		AAC5E6882D42BAB600B58BFD /* RedPaprikaUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RedPaprikaUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,13 +67,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAC5E6822D42BAB600B58BFD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,7 +76,6 @@
 				AAFBA74A2D44CC7A002E44DE /* README.md */,
 				AAC5E66B2D42BAB400B58BFD /* RedPaprika */,
 				AAC5E67E2D42BAB600B58BFD /* RedPaprikaTests */,
-				AAC5E6882D42BAB600B58BFD /* RedPaprikaUITests */,
 				AAC5E66A2D42BAB400B58BFD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,7 +85,6 @@
 			children = (
 				AAC5E6692D42BAB400B58BFD /* RedPaprika.app */,
 				AAC5E67B2D42BAB600B58BFD /* RedPaprikaTests.xctest */,
-				AAC5E6852D42BAB600B58BFD /* RedPaprikaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,29 +137,6 @@
 			productReference = AAC5E67B2D42BAB600B58BFD /* RedPaprikaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AAC5E6842D42BAB600B58BFD /* RedPaprikaUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAC5E6952D42BAB600B58BFD /* Build configuration list for PBXNativeTarget "RedPaprikaUITests" */;
-			buildPhases = (
-				AAC5E6812D42BAB600B58BFD /* Sources */,
-				AAC5E6822D42BAB600B58BFD /* Frameworks */,
-				AAC5E6832D42BAB600B58BFD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AAC5E6872D42BAB600B58BFD /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				AAC5E6882D42BAB600B58BFD /* RedPaprikaUITests */,
-			);
-			name = RedPaprikaUITests;
-			packageProductDependencies = (
-			);
-			productName = RedPaprikaUITests;
-			productReference = AAC5E6852D42BAB600B58BFD /* RedPaprikaUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -196,10 +151,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					AAC5E67A2D42BAB600B58BFD = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = AAC5E6682D42BAB400B58BFD;
-					};
-					AAC5E6842D42BAB600B58BFD = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = AAC5E6682D42BAB400B58BFD;
 					};
@@ -221,7 +172,6 @@
 			targets = (
 				AAC5E6682D42BAB400B58BFD /* RedPaprika */,
 				AAC5E67A2D42BAB600B58BFD /* RedPaprikaTests */,
-				AAC5E6842D42BAB600B58BFD /* RedPaprikaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,13 +186,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AAC5E6792D42BAB600B58BFD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAC5E6832D42BAB600B58BFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -266,13 +209,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAC5E6812D42BAB600B58BFD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -280,11 +216,6 @@
 			isa = PBXTargetDependency;
 			target = AAC5E6682D42BAB400B58BFD /* RedPaprika */;
 			targetProxy = AAC5E67C2D42BAB600B58BFD /* PBXContainerItemProxy */;
-		};
-		AAC5E6872D42BAB600B58BFD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAC5E6682D42BAB400B58BFD /* RedPaprika */;
-			targetProxy = AAC5E6862D42BAB600B58BFD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -512,40 +443,6 @@
 			};
 			name = Release;
 		};
-		AAC5E6962D42BAB600B58BFD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HTY82DL698;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gio.RedPaprikaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RedPaprika;
-			};
-			name = Debug;
-		};
-		AAC5E6972D42BAB600B58BFD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HTY82DL698;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gio.RedPaprikaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RedPaprika;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -572,15 +469,6 @@
 			buildConfigurations = (
 				AAC5E6932D42BAB600B58BFD /* Debug */,
 				AAC5E6942D42BAB600B58BFD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AAC5E6952D42BAB600B58BFD /* Build configuration list for PBXNativeTarget "RedPaprikaUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AAC5E6962D42BAB600B58BFD /* Debug */,
-				AAC5E6972D42BAB600B58BFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
