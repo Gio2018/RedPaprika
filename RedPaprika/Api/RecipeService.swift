@@ -3,13 +3,6 @@
 
 import Foundation
 
-enum ApiError: Error {
-    case invalidResponse
-    case malformedData
-    case emptyData
-    case requestError
-}
-
 protocol RecipeService: Sendable {
     func getRecipes() async throws -> [RemoteRecipe]
 }
